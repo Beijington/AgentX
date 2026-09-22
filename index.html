@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="PERA AgentX Alpha：了解面向 CAE 工作流的受控验证方式、演示流程与设计伙伴合作。">
+  <title>PERA AgentX Alpha｜仿真任务的受控执行与验证</title>
+  <style>
+    :root {
+      --bg: #080c0d;
+      --surface: #101718;
+      --surface-2: #142021;
+      --line: #253334;
+      --text: #eef4f0;
+      --muted: #a7b6b1;
+      --green: #55e29d;
+      --green-deep: #123c2b;
+      --orange: #f1c585;
+      --max: 1180px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--bg); color: var(--text); font-family: "Segoe UI", "Microsoft YaHei", "PingFang SC", sans-serif; line-height: 1.65; }
+    button, input, select, textarea { font: inherit; }
+    a { color: inherit; text-decoration: none; }
+    button { cursor: pointer; }
+    :focus-visible { outline: 2px solid var(--green); outline-offset: 3px; }
+    .container { width: min(calc(100% - 44px), var(--max)); margin: auto; }
+    .skip-link { position: absolute; left: 16px; top: -100px; background: var(--green); color: #082015; padding: 9px 14px; z-index: 99; }
+    .skip-link:focus { top: 10px; }
+    .topnote { border-bottom: 1px solid var(--line); background: #0c1414; color: var(--muted); font-size: 12px; }
+    .topnote .container { display: flex; gap: 10px; align-items: center; min-height: 36px; }
+    .dot { width: 7px; height: 7px; flex: none; border-radius: 50%; background: var(--green); box-shadow: 0 0 14px rgba(85,226,157,.65); }
+    .header { position: sticky; top: 0; z-index: 20; backdrop-filter: blur(18px); background: rgba(8,12,13,.91); border-bottom: 1px solid var(--line); }
+    .header-inner { min-height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .brand { display: inline-flex; align-items: center; gap: 11px; font-weight: 800; letter-spacing: .015em; white-space: nowrap; }
+    .mark { display: grid; place-items: center; width: 34px; height: 34px; border: 1px solid var(--green); border-radius: 9px; color: var(--green); font-size: 18px; line-height: 1; }
+    .brand small { display: block; font-size: 9px; color: var(--muted); letter-spacing: .16em; font-weight: 600; line-height: 1.1; }
+    .nav { display: flex; align-items: center; gap: 22px; font-size: 13px; color: #c7d4cf; }
+    .nav a:hover, .footer a:hover { color: var(--green); }
+    .nav-cta, .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 44px; padding: 0 18px; border-radius: 8px; font-weight: 700; font-size: 13px; transition: transform .2s ease, background .2s ease, border-color .2s ease; }
+    .nav-cta, .btn.primary { background: var(--green); border: 1px solid var(--green); color: #092017; }
+    .nav-cta:hover, .btn:hover { transform: translateY(-2px); }
+    .btn.secondary { border: 1px solid #49665b; background: rgba(255,255,255,.02); color: var(--text); }
+    .menu-button { display: none; color: var(--text); border: 1px solid var(--line); background: var(--surface); border-radius: 7px; padding: 7px 11px; }
+    main section { scroll-margin-top: 84px; }
+    .hero { position: relative; overflow: hidden; padding: 94px 0 84px; background: radial-gradient(circle at 72% 40%, rgba(35,125,81,.18), transparent 36%), linear-gradient(180deg,#0c1414 0%,#080c0d 100%); }
+    .hero::after { content: ""; pointer-events: none; position: absolute; inset: 0; opacity: .18; background-image: linear-gradient(to right, #446050 1px, transparent 1px), linear-gradient(to bottom, #446050 1px, transparent 1px); background-size: 56px 56px; mask-image: linear-gradient(to right,transparent 0%,black 55%,black 100%); }
+    .hero-grid { position: relative; z-index: 1; display: grid; grid-template-columns: 1.05fr .95fr; gap: 60px; align-items: center; }
+    .eyebrow { color: var(--green); text-transform: uppercase; letter-spacing: .16em; font-size: 11px; font-weight: 800; margin: 0 0 20px; }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 { font-size: clamp(37px, 4.7vw, 65px); line-height: 1.12; letter-spacing: -.035em; margin-bottom: 24px; }
+    h1 em { color: var(--green); font-style: normal; }
+    .lead { max-width: 640px; color: #c3d1cb; font-size: 17px; line-height: 1.85; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+    .micro { color: var(--muted); font-size: 12px; margin: 22px 0 0; }
+    .hero-panel { border: 1px solid #345047; border-radius: 18px; padding: 24px; background: rgba(11,21,20,.86); box-shadow: 0 30px 80px rgba(0,0,0,.28); }
+    .panel-top { display: flex; align-items: center; justify-content: space-between; padding-bottom: 18px; border-bottom: 1px solid var(--line); font-size: 12px; color: var(--muted); }
+    .panel-badge { border: 1px solid #3c7057; color: var(--green); border-radius: 50px; padding: 4px 9px; font-size: 10px; font-weight: 800; letter-spacing: .08em; }
+    .task-head { padding: 22px 0 16px; }
+    .task-head small { color: var(--muted); letter-spacing: .08em; text-transform: uppercase; font-size: 10px; }
+    .task-head strong { display: block; font-size: 19px; margin-top: 6px; }
+    .flow-mini { display: grid; gap: 10px; }
+    .flow-mini div { display: flex; align-items: center; gap: 10px; border: 1px solid var(--line); background: #101b19; border-radius: 8px; padding: 11px 13px; color: #dbe8e0; font-size: 12px; }
+    .flow-mini b { display: grid; place-items: center; width: 23px; height: 23px; border-radius: 50%; background: var(--green-deep); color: var(--green); font-size: 11px; }
+    .panel-foot { border-top: 1px solid var(--line); margin-top: 18px; padding-top: 15px; color: var(--muted); font-size: 11px; }
+    .section { padding: 94px 0; border-top: 1px solid var(--line); }
+    .section.alt { background: #0c1213; }
+    .section-head { max-width: 770px; margin-bottom: 42px; }
+    h2 { font-size: clamp(29px, 3.5vw, 45px); line-height: 1.22; letter-spacing: -.025em; margin-bottom: 18px; }
+    .section-intro { color: var(--muted); font-size: 15px; line-height: 1.85; }
+    .three, .cases { display: grid; grid-template-columns: repeat(3,1fr); gap: 15px; }
+    .card { border: 1px solid var(--line); background: var(--surface); border-radius: 12px; padding: 28px; }
+    .card .number { color: var(--green); font-size: 11px; letter-spacing: .12em; font-weight: 800; }
+    .card h3 { font-size: 18px; margin: 20px 0 9px; }
+    .card p { font-size: 13px; color: var(--muted); margin: 0; }
+    .steps { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 13px; overflow: hidden; }
+    .step { background: var(--surface); padding: 27px; min-height: 164px; }
+    .step .number { color: var(--green); font-size: 11px; font-weight: 800; }
+    .step h3 { margin: 12px 0 7px; font-size: 16px; }
+    .step p { margin: 0; color: var(--muted); font-size: 12px; }
+    .note { border-left: 3px solid var(--green); background: #0f201a; padding: 15px 18px; margin-top: 24px; color: #bfd9cb; font-size: 13px; }
+    .video-box { position: relative; min-height: 385px; display: grid; place-items: center; text-align: center; border: 1px solid #396550; border-radius: 16px; background: radial-gradient(circle at center, #1b3c2c 0%, #10211e 45%, #0c1515 100%); overflow: hidden; }
+    .video-box::before { content: ""; position: absolute; inset: 22px; border: 1px solid rgba(85,226,157,.18); border-radius: 12px; }
+    .video-inner { position: relative; z-index: 1; padding: 22px; }
+    .play { display: grid; place-items: center; width: 72px; height: 72px; margin: 0 auto 18px; border-radius: 50%; border: 1px solid var(--green); background: rgba(85,226,157,.12); color: var(--green); font-size: 25px; }
+    .video-inner h3 { font-size: 23px; margin-bottom: 8px; }
+    .video-inner p { color: var(--muted); max-width: 470px; font-size: 13px; }
+    .video-hint { color: var(--muted); font-size: 12px; margin: 16px 0 0; }
+    .case-grid { display: grid; grid-template-columns: 1.45fr .75fr; gap: 16px; }
+    .case-main { padding: 33px; border: 1px solid #3d5c4b; border-radius: 13px; background: linear-gradient(135deg,#14241d,#101718); }
+    .case-side { padding: 33px; border: 1px solid var(--line); border-radius: 13px; background: var(--surface); }
+    .tag { display: inline-block; font-size: 11px; font-weight: 800; color: var(--orange); border: 1px solid #816342; padding: 4px 9px; border-radius: 50px; margin-bottom: 15px; }
+    .case-main h3, .case-side h3 { font-size: 23px; line-height: 1.35; margin-bottom: 12px; }
+    .case-main p, .case-side p { color: var(--muted); font-size: 13px; }
+    .case-list { display: grid; grid-template-columns: repeat(3,1fr); gap: 15px; margin-top: 25px; }
+    .case-list div { border-top: 1px solid #3b574a; padding-top: 16px; }
+    .case-list b { color: var(--green); display: block; margin-bottom: 6px; font-size: 13px; }
+    .case-list span { color: #c1d0c6; font-size: 12px; }
+    .partner-layout { display: grid; grid-template-columns: .84fr 1.16fr; gap: 40px; }
+    .partner-quote { border: 1px solid #3c5c4a; border-radius: 13px; background: #112019; padding: 28px; align-self: start; }
+    .partner-quote strong { display: block; color: var(--green); font-size: 19px; line-height: 1.55; }
+    .partner-quote p { color: var(--muted); font-size: 13px; margin-top: 16px; margin-bottom: 0; }
+    .timeline { border-left: 1px solid #365647; margin-left: 9px; }
+    .time-row { position: relative; padding: 0 0 30px 27px; }
+    .time-row:last-child { padding-bottom: 0; }
+    .time-row::before { content: ""; position: absolute; top: 5px; left: -5px; width: 9px; height: 9px; border-radius: 50%; background: var(--green); }
+    .time-row small { color: var(--green); font-size: 11px; font-weight: 800; }
+    .time-row h3 { font-size: 17px; margin: 5px 0; }
+    .time-row p { color: var(--muted); font-size: 13px; margin: 0; }
+    .tool-note { margin-top: 28px; padding: 19px 22px; border: 1px solid var(--line); border-radius: 9px; color: #cbd9ce; background: var(--surface); font-size: 13px; }
+    .faq { display: grid; grid-template-columns: .72fr 1.28fr; gap: 42px; }
+    details { border-bottom: 1px solid var(--line); padding: 16px 0; }
+    details:first-child { border-top: 1px solid var(--line); }
+    summary { list-style: none; font-weight: 700; font-size: 15px; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: "+"; color: var(--green); font-size: 21px; font-weight: 400; }
+    details[open] summary::after { content: "−"; }
+    details p { color: var(--muted); font-size: 13px; margin: 12px 28px 0 0; }
+    .contact { display: grid; grid-template-columns: .85fr 1.15fr; gap: 54px; }
+    .contact-copy p { color: var(--muted); font-size: 14px; }
+    .form { border: 1px solid #3a5649; border-radius: 14px; background: var(--surface); padding: 28px; }
+    .form-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 14px; }
+    label { display: block; color: #d7e5dd; font-size: 12px; font-weight: 700; margin-bottom: 5px; }
+    input, select, textarea { display: block; width: 100%; border: 1px solid #3d5148; border-radius: 7px; background: #0b1211; color: var(--text); padding: 11px 12px; font-size: 13px; }
+    input::placeholder, textarea::placeholder { color: #788981; }
+    textarea { resize: vertical; min-height: 105px; }
+    .full { grid-column: 1 / -1; }
+    .form .btn { margin-top: 17px; width: 100%; }
+    .form-caption { color: var(--muted); font-size: 11px; margin: 12px 0 0; }
+    .form-status { display: none; margin-top: 14px; border: 1px solid #47775b; padding: 11px; border-radius: 7px; color: #d9efdf; background: #123023; font-size: 12px; }
+    .form-status.visible { display: block; }
+    .footer { border-top: 1px solid var(--line); padding: 37px 0 48px; color: var(--muted); font-size: 12px; }
+    .footer-inner { display: flex; align-items: start; justify-content: space-between; gap: 28px; }
+    .footer p { max-width: 600px; margin: 8px 0 0; }
+    .footer-links { display: flex; gap: 20px; white-space: nowrap; }
+    @media (max-width: 960px) {
+      .nav { gap: 14px; }
+      .nav a:nth-child(2), .nav a:nth-child(3), .nav a:nth-child(4) { display: none; }
+      .hero-grid, .contact, .partner-layout { grid-template-columns: 1fr; }
+      .hero-panel { max-width: 660px; }
+      .faq { grid-template-columns: 1fr; gap: 12px; }
+    }
+    @media (max-width: 700px) {
+      .container { width: min(calc(100% - 32px), var(--max)); }
+      .header-inner { min-height: 62px; }
+      .menu-button { display: block; }
+      .nav { display: none; position: absolute; left: 0; right: 0; top: 62px; padding: 18px 16px 22px; background: #0b1212; border-bottom: 1px solid var(--line); flex-direction: column; align-items: stretch; }
+      .nav.open { display: flex; }
+      .nav a:nth-child(n) { display: block; }
+      .nav-cta { text-align: center; }
+      .hero { padding: 70px 0 65px; }
+      .hero-grid { gap: 37px; }
+      .lead { font-size: 15px; }
+      .section { padding: 65px 0; }
+      .three, .steps, .case-grid, .case-list, .form-grid { grid-template-columns: 1fr; }
+      .step { min-height: auto; }
+      .full { grid-column: auto; }
+      .video-box { min-height: 295px; }
+      .footer-inner { flex-direction: column; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .btn, .nav-cta { transition: none; } }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">跳转到正文</a>
+  <div class="topnote"><div class="container"><span class="dot" aria-hidden="true"></span><span>Alpha 演示版 · 内容与能力表述待正式审核 · 本页面尚未开放真实申请提交</span></div></div>
+  <header class="header">
+    <div class="container header-inner">
+      <a class="brand" href="#top" aria-label="PERA AgentX 首页"><span class="mark" aria-hidden="true">✳</span><span>PERA AgentX<small>ALPHA EXPERIENCE</small></span></a>
+      <button class="menu-button" type="button" aria-label="展开导航" aria-controls="main-nav" aria-expanded="false">菜单</button>
+      <nav id="main-nav" class="nav" aria-label="主导航">
+        <a href="#problem">客户问题</a><a href="#workflow">工作流程</a><a href="#demo">视频演示</a><a href="#cases">案例</a><a href="#partner">设计伙伴</a><a href="#faq">常见问题</a>
+        <a class="nav-cta" href="#contact">申请场景评估 ↗</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section id="top" class="hero">
+      <div class="container hero-grid">
+        <div>
+          <p class="eyebrow">PERA AGENTX / ALPHA</p>
+          <h1>让仿真任务<br>走向<em>可检查的执行结果</em></h1>
+          <p class="lead">PERA AgentX 面向 CAE 工作流，协助工程师整理任务要求、调用仿真工具、记录执行过程并生成结果报告。Alpha 版本正在限定场景中验证工程可用性，关键配置与结果由工程师审核。</p>
+          <div class="hero-actions"><a class="btn primary" href="#demo">观看流程演示 <span aria-hidden="true">↗</span></a><a class="btn secondary" href="#partner">了解设计伙伴合作 <span aria-hidden="true">→</span></a></div>
+          <p class="micro">当前试用以 OpenFOAM 为基础 · 受邀试用与场景评估 · 视频素材即将补充</p>
+        </div>
+        <div class="hero-panel" aria-label="Alpha 工作流程示意">
+          <div class="panel-top"><span>工程任务 / 工作流程示意</span><span class="panel-badge">ALPHA</span></div>
+          <div class="task-head"><small>受控流程</small><strong>从已有网格与需求描述开始</strong></div>
+          <div class="flow-mini"><div><b>01</b><span>上传网格与需求文件</span></div><div><b>02</b><span>生成配置，由工程师核对</span></div><div><b>03</b><span>执行求解，查看状态与结果</span></div><div><b>04</b><span>获取报告并记录改进项</span></div></div>
+          <div class="panel-foot">示意图仅说明流程；具体能力以版本、算例和验证环境为准。</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="problem" class="section">
+      <div class="container">
+        <div class="section-head"><p class="eyebrow">THE ENGINEERING PROBLEM</p><h2>工程团队需要一条更清楚的仿真任务链</h2><p class="section-intro">重复配置与资料整理消耗时间；关键判断又依赖工程师经验。AgentX 从限定场景入手，验证哪些工作可以交给系统，哪些必须由工程师确认。</p></div>
+        <div class="three"><article class="card"><span class="number">01 / 准备</span><h3>任务要求分散</h3><p>几何、网格、边界与验收指标散落在不同文件和沟通记录中，准备工作难以复用。</p></article><article class="card"><span class="number">02 / 执行</span><h3>过程缺少统一视图</h3><p>配置、求解状态与异常信息需要在多个工具之间追踪，复核工作容易被打断。</p></article><article class="card"><span class="number">03 / 交付</span><h3>结果需要可追溯</h3><p>工程师需要知道输入、确认、执行与报告分别依据什么，才能判断结果是否可信。</p></article></div>
+      </div>
+    </section>
+
+    <section id="workflow" class="section alt">
+      <div class="container">
+        <div class="section-head"><p class="eyebrow">ALPHA WORKFLOW</p><h2>从任务输入到结果报告</h2><p class="section-intro">以下步骤依据现有试用指南整理。演示从已有网格开始，执行前设有工程师确认节点。</p></div>
+        <div class="steps"><article class="step"><span class="number">STEP 01</span><h3>创建任务</h3><p>上传已有网格与描述仿真目标的文件。</p></article><article class="step"><span class="number">STEP 02</span><h3>整理要求</h3><p>系统生成求解器输入与任务配置。</p></article><article class="step"><span class="number">STEP 03</span><h3>工程师核对</h3><p>检查关键设置，确认后启动计算。</p></article><article class="step"><span class="number">STEP 04</span><h3>执行求解</h3><p>调用指定求解器，展示运行过程。</p></article><article class="step"><span class="number">STEP 05</span><h3>查看结果</h3><p>检查计算结果、报告总结与报告包。</p></article><article class="step"><span class="number">STEP 06</span><h3>记录改进</h3><p>把问题和人工反馈纳入下一轮验证。</p></article></div>
+        <div class="note"><strong>当前边界：</strong>试用流程尚不能证明“上传原始 CAD 后自动完成几何清理和网格生成”。这类前处理能力需要结合代表模型和质量标准单独验证。</div>
+      </div>
+    </section>
+
+    <section id="demo" class="section">
+      <div class="container">
+        <div class="section-head"><p class="eyebrow">VIDEO WALKTHROUGH</p><h2>看一次完整的任务演示</h2><p class="section-intro">视频将在素材审核后加入。正式页面会同时说明算例、工具、人工确认点与结果审核状态。</p></div>
+        <div class="video-box" role="img" aria-label="视频占位：AgentX Alpha 工作流程演示尚未提供"><div class="video-inner"><div class="play" aria-hidden="true">▶</div><h3>AgentX Alpha 流程演示</h3><p>视频位置已预留。将展示任务输入、配置核对、求解过程及报告查看。</p><span class="panel-badge">VIDEO COMING SOON</span></div></div>
+        <p class="video-hint">上线前为影片补充字幕和文字步骤；客户资料与软件界面需经过对外披露核对。</p>
+      </div>
+    </section>
+
+    <section id="cases" class="section alt">
+      <div class="container">
+        <div class="section-head"><p class="eyebrow">SCENARIO EXAMPLES</p><h2>案例从真实问题开始</h2><p class="section-intro">以下展示如何定义验证范围。合作方式示例与演示算例均不代表已经取得客户验收成果。</p></div>
+        <div class="case-grid">
+          <article class="case-main"><span class="tag">匿名需求交流 · 合作方式示例</span><h3>一家制造企业希望减少仿真流程中的重复工作</h3><p>客户关注模型准备、参数设置、求解和报告中依赖工程师经验的环节。双方先选择一个代表模型，确定现行流程和结果标准，再决定哪些步骤由 AgentX 执行、哪些由工程师确认。</p><div class="case-list"><div><b>客户提供</b><span>可授权模型或已有网格、操作规范、人工基线和验收人。</span></div><div><b>安世亚太负责</b><span>拆解流程，配置限定工具链，记录运行与人工接管点。</span></div><div><b>共同评估</b><span>结果质量、真实工时与形成的规则能否复用。</span></div></div></article>
+          <article class="case-side"><span class="tag">演示算例 · 证据准备中</span><h3>OpenFOAM 试用算例</h3><p>将从现有试用包中选择一个可复现的流体算例，按“目标、输入、配置、计算、结果、限制”展示。</p><p>完成运行记录与工程师复核后，再补充具体画面和结果说明。</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="partner" class="section">
+      <div class="container">
+        <div class="section-head"><p class="eyebrow">DESIGN PARTNER</p><h2>与设计伙伴验证一条可复用的工程任务链</h2><p class="section-intro">围绕一个模型族、一个物理域、一套主工具链和一种部署方式，共同建立基线、复核结果，再决定是否扩大范围。</p></div>
+        <div class="partner-layout"><div class="partner-quote"><strong>客户证明问题是否真实；共同约定结果怎样验收；产品团队判断哪些能力可以复用。</strong><p>设计伙伴合作要求代表模型、人工流程与专业验收人。它比开放注册试用更深入，也必须控制范围和研发投入。</p><p><a class="btn secondary" href="#contact">提交合作场景 →</a></p></div><div class="timeline"><div class="time-row"><small>第 1–30 天 / 范围确认</small><h3>锁定模型、工具与验收标准</h3><p>确认软件版本、许可、部署条件、人工基线和黄金结果，决定唯一主工具链。</p></div><div class="time-row"><small>第 31–60 天 / 打通与复现</small><h3>用代表模型验证工程流程</h3><p>核对运行过程与结果，并由非原开发人员复现安装和执行。</p></div><div class="time-row"><small>第 61–90 天 / 受控验证</small><h3>比较结果与真实工作量</h3><p>记录操作、审查、等待、返工和结果差异，形成下一阶段判断。</p></div></div></div>
+        <div class="tool-note"><strong>关于求解器：</strong>当前试用以 OpenFOAM 为基础。若选定设计伙伴的业务环境明确使用 Fluent，可在首阶段完成技术与资源评估后，将 Fluent 选为该轮唯一主工具链。其他求解器需另行评估；以上时间安排是验证路径建议，并非交付承诺。</div>
+      </div>
+    </section>
+
+    <section id="faq" class="section alt">
+      <div class="container faq"><div><p class="eyebrow">FREQUENTLY ASKED QUESTIONS</p><h2>常见问题</h2><p class="section-intro">让工程师与业务负责人在开始前了解试用范围和合作条件。</p></div><div>
+        <details><summary>AgentX 会替代现有求解器吗？</summary><p>不会。实际计算由接入的求解器完成，AgentX 协助组织任务、配置与核对输入、调用工具并整理过程和结果。</p></details>
+        <details><summary>现在可以自行注册试用吗？</summary><p>目前采用受邀试用。团队先确认场景与试用条件，再提供账号和配套资料。</p></details>
+        <details><summary>可以直接上传 CAD 并自动完成网格吗？</summary><p>现有试用流程从已有网格开始。几何处理和网格自动化须按具体模型、工具与质量标准验证。</p></details>
+        <details><summary>如果我们使用 Fluent 或其他求解器呢？</summary><p>请在场景申请中说明软件及版本。设计伙伴验证先选定一套主工具链；Fluent 可以作为首阶段评估候选，其他工具需另行确认适配和排期。</p></details>
+        <details><summary>客户需要投入什么？</summary><p>需要能够提供现行规范、核对关键设置并审核结果的工程师，以及可合法用于验证的代表模型和人工基线。客户无需自行开发 AgentX 代码。</p></details>
+        <details><summary>如何判断合作是否成功？</summary><p>双方在开始前约定结果质量、工作时间和人工介入的测量方法。提效数字在取得人工基线并完成对照验证后公布。</p></details>
+        <details><summary>提交申请后一定能进入设计伙伴计划吗？</summary><p>团队会评估场景、工具链、资料、验收条件与研发资源，再确认合适的交流或验证方式。</p></details>
+      </div></div>
+    </section>
+
+    <section id="contact" class="section">
+      <div class="container contact"><div class="contact-copy"><p class="eyebrow">START A CONVERSATION</p><h2>告诉我们您想验证的仿真任务</h2><p>描述现有流程中最耗时的一步，以及您希望如何判断改进是否成立。团队将先核对场景与 Alpha 范围，再讨论交流或受邀试用。</p><div class="note">这是本地 HTML 演示版。右侧表单不会发送或保存任何资料；正式上线前需要接入企业指定的线索处理系统和隐私说明。</div></div><form class="form" id="interest-form"><div class="form-grid"><div><label for="company">公司或团队</label><input id="company" name="company" placeholder="例如：某制造企业" required></div><div><label for="role">您的岗位</label><input id="role" name="role" placeholder="例如：仿真工程师" required></div><div><label for="software">现用仿真软件</label><select id="software" name="software" required><option value="" selected disabled>请选择</option><option>OpenFOAM</option><option>ANSYS Fluent</option><option>STAR-CCM+</option><option>其他 / 尚未确定</option></select></div><div><label for="contact-method">联系邮箱</label><input id="contact-method" name="contact-method" type="email" placeholder="name@example.com" required></div><div class="full"><label for="challenge">希望验证的问题</label><textarea id="challenge" name="challenge" placeholder="请简述场景、目前最耗时的步骤，以及是否有代表模型或人工基线。请勿在此填写机密信息。" required></textarea></div></div><button class="btn primary" type="submit">演示提交效果 →</button><p class="form-caption">演示提交仅显示页面反馈，不会发送或存储输入内容。</p><div class="form-status" id="form-status" role="status" aria-live="polite">这是 HTML 演示版，资料并未提交。正式网站接入线索系统后，这里将展示申请结果和后续联系说明。</div></form></div>
+    </section>
+  </main>
+
+  <footer class="footer"><div class="container footer-inner"><div><div class="brand"><span class="mark" aria-hidden="true">✳</span><span>PERA AgentX<small>ALPHA EXPERIENCE</small></span></div><p>本页面为 Alpha 官网内容与视觉演示，尚未作为正式产品声明发布。能力范围、演示证据与申请流程需经团队确认。</p></div><div class="footer-links"><a href="#top">返回顶部 ↑</a><a href="https://www.peraglobal.com/" target="_blank" rel="noopener noreferrer">安世亚太官网 ↗</a></div></div></footer>
+
+  <script>
+    const menuButton = document.querySelector('.menu-button');
+    const nav = document.querySelector('#main-nav');
+    menuButton.addEventListener('click', () => {
+      const isOpen = nav.classList.toggle('open');
+      menuButton.setAttribute('aria-expanded', String(isOpen));
+      menuButton.setAttribute('aria-label', isOpen ? '收起导航' : '展开导航');
+    });
+    nav.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+      nav.classList.remove('open');
+      menuButton.setAttribute('aria-expanded', 'false');
+      menuButton.setAttribute('aria-label', '展开导航');
+    }));
+    document.querySelector('#interest-form').addEventListener('submit', event => {
+      event.preventDefault();
+      document.querySelector('#form-status').classList.add('visible');
+    });
+  </script>
+</body>
+</html>
