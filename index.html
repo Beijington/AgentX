@@ -139,16 +139,56 @@
     .problem-card:nth-child(2) { background: linear-gradient(145deg, rgba(107,174,255,.12), transparent 56%), var(--card); }
     .problem-card:nth-child(3) { background: linear-gradient(145deg, rgba(66,189,164,.12), transparent 56%), var(--card); }
 
-    .workflow-panel { border-radius: 28px; padding: 54px; background: #202523; color: white; overflow: hidden; position: relative; }
-    .workflow-panel:before { content: ""; position: absolute; inset: auto -15% -55% 30%; height: 420px; background: radial-gradient(circle, rgba(66,189,164,.24), transparent 65%); }
-    .workflow-head { display: grid; grid-template-columns: 1fr 1fr; gap: 8%; margin-bottom: 56px; position: relative; }
-    .workflow-head p { color: #b9bfbc; }
-    .workflow { display: grid; grid-template-columns: repeat(6, 1fr); position: relative; }
-    .workflow:before { content: ""; position: absolute; left: 5%; right: 5%; top: 19px; height: 1px; background: #505754; }
-    .step { position: relative; padding-right: 18px; }
-    .step-dot { width: 39px; height: 39px; display: grid; place-items: center; border: 1px solid #67706c; border-radius: 50%; background: #202523; color: #9be3d4; font-size: 12px; position: relative; z-index: 2; }
-    .step h4 { margin: 24px 0 8px; font-size: 16px; }
-    .step p { color: #aeb4b1; font-size: 13px; line-height: 1.55; }
+    .value-intro { max-width: 1040px; }
+    .value-intro h2 { max-width: 880px; margin-left: auto; margin-right: auto; }
+    .value-subtitle { max-width: 760px; margin: 18px auto 0; color: #444946; font-size: clamp(19px, 2.2vw, 26px); font-weight: 500; line-height: 1.45; letter-spacing: -.015em; }
+    .value-intro .lead { max-width: 820px; margin: 20px auto 0; color: #70736f; font-size: 15px; line-height: 1.85; }
+    .value-path { border-top: 1px solid var(--line); position: relative; }
+    .value-stage {
+      display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(240px, .45fr);
+      border-bottom: 1px solid var(--line); background: transparent;
+    }
+    .value-stage-main { padding: 38px 46px 38px 10px; }
+    .value-stage-label { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; color: var(--muted); font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+    .value-stage-label .stage-number { color: var(--ink); }
+    .value-stage h3 { margin-bottom: 10px; font-size: clamp(27px, 3vw, 37px); letter-spacing: -.035em; }
+    .value-stage-copy { max-width: 760px; margin: 0 0 16px; color: #575b58; font-size: 15px; line-height: 1.7; }
+    .value-points { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px 22px; margin: 0; padding: 0; list-style: none; }
+    .value-points li { position: relative; padding-left: 15px; color: #666a67; font-size: 13px; line-height: 1.55; }
+    .value-points li:before { content: ""; position: absolute; left: 0; top: .62em; width: 5px; height: 5px; border-radius: 50%; background: #2d3230; }
+    .value-kpi {
+      display: flex; flex-direction: column; align-items: flex-start; justify-content: center;
+      margin: 30px 0; padding: 18px 0 18px 44px; color: var(--ink); border-left: 1px solid var(--line);
+    }
+    .value-kpi small { font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #8b8e8b; }
+    .value-kpi strong { margin: 7px 0 5px; font-size: clamp(46px, 5vw, 66px); line-height: 1; letter-spacing: -.055em; }
+    .value-kpi span { max-width: 210px; font-size: 14px; line-height: 1.5; color: #5e625f; }
+    .value-kpi em { margin-top: 8px; color: #8b8e8b; font-size: 12px; font-style: normal; }
+    .value-note { margin: 20px 6px 0; color: #7a7d79; font-size: 12px; line-height: 1.65; }
+
+    .workflow-panel {
+      border-radius: 28px; padding: 54px; color: white; overflow: hidden; position: relative;
+      background:
+        radial-gradient(circle at 8% 15%, rgba(32,132,255,.72), transparent 38%),
+        radial-gradient(circle at 53% 108%, rgba(123,55,226,.82), transparent 48%),
+        radial-gradient(circle at 96% 22%, rgba(230,54,91,.68), transparent 42%),
+        linear-gradient(128deg, #071d50 0%, #351b72 53%, #791b48 100%);
+      box-shadow: 0 28px 80px rgba(39,29,91,.22);
+    }
+    .workflow-panel:before { content: ""; position: absolute; inset: 0; background: linear-gradient(115deg, rgba(255,255,255,.08), transparent 35%, rgba(255,255,255,.04)); pointer-events: none; }
+    .workflow-head { display: grid; grid-template-columns: 1.15fr .85fr; gap: 8%; margin-bottom: 38px; position: relative; z-index: 1; }
+    .workflow-head .eyebrow { color: rgba(255,255,255,.72) !important; }
+    .workflow-head p { color: rgba(255,255,255,.8); font-size: 16px; line-height: 1.75; }
+    .workflow { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; position: relative; z-index: 1; }
+    .workflow:before { display: none; }
+    .step { min-height: 280px; padding: 20px 17px 22px; border: 1px solid rgba(255,255,255,.2); border-radius: 18px; background: rgba(255,255,255,.085); box-shadow: inset 0 1px 0 rgba(255,255,255,.12); backdrop-filter: blur(12px); }
+    .step-dot { width: 38px; height: 38px; display: grid; place-items: center; border: 1px solid rgba(255,255,255,.38); border-radius: 50%; background: rgba(8,18,51,.22); color: white; font-size: 12px; }
+    .step h4 { margin: 22px 0 11px; font-size: 18px; line-height: 1.35; }
+    .step p { margin: 0; color: rgba(255,255,255,.76); font-size: 14px; line-height: 1.6; }
+    .workflow-collab { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 26px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,.2); position: relative; z-index: 1; }
+    .workflow-collab div { display: flex; align-items: flex-start; gap: 10px; color: rgba(255,255,255,.88); font-size: 14px; line-height: 1.55; }
+    .workflow-collab i { flex: 0 0 7px; width: 7px; height: 7px; margin-top: .55em; border-radius: 50%; background: white; box-shadow: 0 0 16px rgba(255,255,255,.75); }
+    .workflow-summary { margin: 24px 0 0; padding: 16px 20px; border: 1px solid rgba(255,255,255,.18); border-radius: 14px; background: rgba(7,18,50,.2); color: white; text-align: center; font-size: 16px; font-weight: 700; line-height: 1.55; position: relative; z-index: 1; }
 
     .proof-card { min-height: 310px; display: flex; flex-direction: column; }
     .proof-image { min-height: 168px; border: 1px dashed #c9c9c4; border-radius: 16px; background: var(--panel); display: grid; place-items: center; color: #858580; text-align: center; padding: 20px; margin-bottom: 24px; }
@@ -236,9 +276,13 @@
       .media-bottom .btn { display: none; }
       .problem-grid, .proof-grid { grid-template-columns: 1fr; }
       .problem-card { min-height: 230px; }
+      .value-stage { grid-template-columns: 1fr 220px; }
+      .value-stage-main { padding: 32px 30px 32px 6px; }
+      .value-points { grid-template-columns: 1fr; gap: 7px; }
+      .value-kpi { padding-left: 28px; }
       .workflow-panel { padding: 36px 25px; }
-      .workflow { grid-template-columns: 1fr 1fr; gap: 28px 16px; }
-      .workflow:before { display: none; }
+      .workflow { grid-template-columns: 1fr 1fr; gap: 16px; }
+      .workflow-collab { grid-template-columns: 1fr; gap: 12px; }
       .value-bar { grid-template-columns: 1fr; }
       .value-item { border-right: 0; border-bottom: 1px solid var(--line); }
       .value-item:last-child { border-bottom: 0; }
@@ -253,8 +297,13 @@
       .media-top { align-items: flex-start; }
       .media-top > .chip { display: none; }
       .media-meta { gap: 9px 14px; }
+      .value-stage { grid-template-columns: 1fr; }
+      .value-stage-main { padding: 30px 4px; }
+      .value-kpi { min-height: 150px; margin: 0 0 22px; padding: 25px 4px 8px; border-left: 0; border-top: 1px solid var(--line); }
+      .value-kpi span { max-width: none; }
+      .workflow-head { grid-template-columns: 1fr; gap: 18px; }
       .workflow { grid-template-columns: 1fr; }
-      .step { display: grid; grid-template-columns: 40px 1fr; column-gap: 14px; }
+      .step { min-height: 0; display: grid; grid-template-columns: 40px 1fr; column-gap: 14px; }
       .step h4 { margin: 6px 0 5px; }
       .step p { grid-column: 2; }
       .timeline-item { grid-template-columns: 62px 1fr; gap: 12px; }
@@ -343,23 +392,39 @@
     </section>
 
     <section class="shell" id="why">
-      <div class="center-intro">
+      <div class="center-intro value-intro">
         <div class="eyebrow">Why co-innovation</div>
-        <h2>真实工程约束，决定 AI 能否创造价值</h2>
-        <p class="lead">通用演示只能说明可能性。AgentX 需要在真实任务、软件版本、质量规范和工程师判断中，证明结果可信、合作有价值、能力可以被重复使用。</p>
+        <h2>让 AI 驱动仿真研发生产力</h2>
+        <p class="value-subtitle">在真实、安全、合规的企业环境中落地</p>
+        <p class="lead">效率提升不能脱离真实工程场景，也不能突破企业的数据安全边界。PERA AgentX 从实际研发任务出发，在符合企业安全与合规要求的环境中验证提效效果，让 AI 带来的生产力提升真正进入日常研发流程。</p>
       </div>
-      <div class="problem-grid">
-        <article class="card problem-card">
-          <span class="number">01 / 重复工作</span>
-          <div><h3>流程消耗工程时间</h3><p class="muted">配置准备、工具切换、状态追踪和报告整理反复发生，却难以形成稳定流程。</p></div>
+      <div class="value-path" aria-label="AgentX 价值成长路径">
+        <article class="value-stage personal">
+          <div class="value-stage-main">
+            <div class="value-stage-label"><span class="stage-number">01</span><span>价值承诺 · 初期 · 6–9 个月</span></div>
+            <h3>释放 CAE 工程师潜能</h3>
+            <p class="value-stage-copy">降低软件操作的学习成本，让工程师在相同时间内完成更多仿真任务。</p>
+            <ul class="value-points"><li>减少重复操作</li><li>缩短软件学习与上手时间</li><li>保留关键过程记录</li></ul>
+          </div>
+          <div class="value-kpi"><small>目标 KPI</small><strong>≥30%</strong><span>同类仿真任务效率提升</span></div>
         </article>
-        <article class="card problem-card">
-          <span class="number">02 / 专家经验</span>
-          <div><h3>关键判断难以复用</h3><p class="muted">设置与结果审核依赖资深工程师，知识往往散落在个人经验、模板和历史项目中。</p></div>
+        <article class="value-stage team">
+          <div class="value-stage-main">
+            <div class="value-stage-label"><span class="stage-number">02</span><span>价值承诺 · 中期 · 12–18 个月</span></div>
+            <h3>让工程能力在团队内复制</h3>
+            <p class="value-stage-copy">将验证有效的方法与规则扩展到更多同类任务，同时提高交付效率与成本效益。</p>
+            <ul class="value-points"><li>统一模板、规则与异常处理</li><li>提升同类任务并行处理能力</li><li>提高一致性，降低单位任务成本</li></ul>
+          </div>
+          <div class="value-kpi"><small>目标 KPI</small><strong>≥3×</strong><span>团队同类任务处理能力</span><em>效率提升 · 成本下降</em></div>
         </article>
-        <article class="card problem-card">
-          <span class="number">03 / 企业差异</span>
-          <div><h3>通用自动化很难直接适配</h3><p class="muted">模型、物理问题、软件版本和验收标准各不相同，需要从一条可衡量的任务链开始。</p></div>
+        <article class="value-stage organization">
+          <div class="value-stage-main">
+            <div class="value-stage-label"><span class="stage-number">03</span><span>价值承诺 · 长期 · 18–30 个月</span></div>
+            <h3>让组织仿真能力规模化增长</h3>
+            <p class="value-stage-copy">将经过验证的工程能力沉淀为组织资产，支持跨项目、跨团队复用与持续扩展。</p>
+            <ul class="value-points"><li>建立可治理、可维护的能力资产</li><li>扩展到更多项目、团队与场景</li><li>降低规模化交付的边际成本</li></ul>
+          </div>
+          <div class="value-kpi"><small>目标 KPI</small><strong>≥10×</strong><span>规模化任务处理能力</span><em>效率提升 · 成本下降</em></div>
         </article>
       </div>
     </section>
@@ -367,17 +432,23 @@
     <section class="shell" id="workflow">
       <div class="workflow-panel">
         <div class="workflow-head">
-          <div><div class="eyebrow" style="color:#a8b0ac">AgentX workflow</div><h2>从任务意图到可检查结果</h2></div>
-          <p>AgentX 组织任务、调用选定工具并记录过程；专业求解仍由 CAE 软件完成，关键设置与工程结论由工程师确认。</p>
+          <div><div class="eyebrow">Multi-agent system</div><h2>六个专业智能体，协作完成工程师任务</h2></div>
+          <p>按任务编排、各司其职。复杂任务可以被分解、回退与审核，关键状态和工程证据在智能体之间显式传递。</p>
         </div>
-        <div class="workflow">
-          <div class="step"><span class="step-dot">01</span><h4>理解任务</h4><p>识别目标、输入资料与约束。</p></div>
-          <div class="step"><span class="step-dot">02</span><h4>准备配置</h4><p>形成工具需要的输入与执行计划。</p></div>
-          <div class="step"><span class="step-dot">03</span><h4>工程师核对</h4><p>确认关键参数、边界和执行条件。</p></div>
-          <div class="step"><span class="step-dot">04</span><h4>调用工具</h4><p>在选定的主工具链上运行任务。</p></div>
-          <div class="step"><span class="step-dot">05</span><h4>整理结果</h4><p>汇总状态、结果、异常和报告。</p></div>
-          <div class="step"><span class="step-dot">06</span><h4>接收反馈</h4><p>记录审核意见，支持下一轮验证。</p></div>
+        <div class="workflow" aria-label="AgentX 六个专业智能体">
+          <div class="step"><span class="step-dot">01</span><h4>几何分析</h4><p>在已支持格式与验证场景内，解析几何与装配、检查基础质量，并提出部件角色和处理建议。</p></div>
+          <div class="step"><span class="step-dot">02</span><h4>网格处理</h4><p>根据几何特征和规则建议网格方案，在适用场景中调用已接入工具生成网格并检查质量。</p></div>
+          <div class="step"><span class="step-dot">03</span><h4>物理配置</h4><p>配置材料与物理模型，设置载荷、边界条件及求解参数。</p></div>
+          <div class="step"><span class="step-dot">04</span><h4>配置验证</h4><p>检查配置完整性与逻辑一致性，并复核关键物理设置的合理性。</p></div>
+          <div class="step"><span class="step-dot">05</span><h4>求解诊断</h4><p>调度计算资源、监控求解过程，分析日志与残差，识别异常并提出处理建议。</p></div>
+          <div class="step"><span class="step-dot">06</span><h4>报告生成</h4><p>汇总结果与检查记录，提取关键指标，生成报告和可追溯证据。</p></div>
         </div>
+        <div class="workflow-collab" aria-label="多智能体协作机制">
+          <div><i></i><span>任务分解与独立决策，支持回退与失败局部化</span></div>
+          <div><i></i><span>显式传递状态与证据，关键节点可插入人工审批</span></div>
+          <div><i></i><span>按职责调用工程模板、企业知识与专业工具</span></div>
+        </div>
+        <p class="workflow-summary">按任务组织专业能力：各司其职、自动流转、失败局部化</p>
       </div>
     </section>
 
