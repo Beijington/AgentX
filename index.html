@@ -176,9 +176,8 @@
       box-shadow: 0 28px 80px rgba(39,29,91,.22);
     }
     .workflow-panel:before { content: ""; position: absolute; inset: 0; background: linear-gradient(115deg, rgba(255,255,255,.08), transparent 35%, rgba(255,255,255,.04)); pointer-events: none; }
-    .workflow-head { display: grid; grid-template-columns: 1.15fr .85fr; gap: 8%; margin-bottom: 38px; position: relative; z-index: 1; }
+    .workflow-head { margin-bottom: 38px; position: relative; z-index: 1; }
     .workflow-head .eyebrow { color: rgba(255,255,255,.72) !important; }
-    .workflow-head p { color: rgba(255,255,255,.8); font-size: 16px; line-height: 1.75; }
     .workflow { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; position: relative; z-index: 1; }
     .workflow:before { display: none; }
     .step { min-height: 280px; padding: 20px 17px 22px; border: 1px solid rgba(255,255,255,.2); border-radius: 18px; background: rgba(255,255,255,.085); box-shadow: inset 0 1px 0 rgba(255,255,255,.12); backdrop-filter: blur(12px); }
@@ -188,13 +187,30 @@
     .workflow-collab { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 26px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,.2); position: relative; z-index: 1; }
     .workflow-collab div { display: flex; align-items: flex-start; gap: 10px; color: rgba(255,255,255,.88); font-size: 14px; line-height: 1.55; }
     .workflow-collab i { flex: 0 0 7px; width: 7px; height: 7px; margin-top: .55em; border-radius: 50%; background: white; box-shadow: 0 0 16px rgba(255,255,255,.75); }
-    .workflow-summary { margin: 24px 0 0; padding: 16px 20px; border: 1px solid rgba(255,255,255,.18); border-radius: 14px; background: rgba(7,18,50,.2); color: white; text-align: center; font-size: 16px; font-weight: 700; line-height: 1.55; position: relative; z-index: 1; }
 
     .proof-card { min-height: 310px; display: flex; flex-direction: column; }
     .proof-image { min-height: 168px; border: 1px dashed #c9c9c4; border-radius: 16px; background: var(--panel); display: grid; place-items: center; color: #858580; text-align: center; padding: 20px; margin-bottom: 24px; }
     .proof-image strong { display: block; color: #4d4d49; margin-bottom: 5px; }
     .proof-card p { color: var(--muted); font-size: 14px; margin: 0; }
     .proof-tag { margin-bottom: 14px; }
+    .case-industry { align-self: flex-start; margin-bottom: 12px; padding: 3px 8px; border-radius: 6px; background: #edf0f3; color: #465363; font: 600 .8125rem/1.45 ui-monospace, "Cascadia Mono", Consolas, monospace; letter-spacing: .025em; text-transform: uppercase; }
+    .case-industry--automotive { background: #fff1c6; color: #725600; }
+    .case-industry--semiconductor { background: #e8e5ff; color: #4533a0; }
+    .case-industry--power { background: #d9f5f7; color: #16646f; }
+    .case-link { color: var(--ink); font-size: .875rem; font-weight: 700; text-decoration: underline; text-underline-offset: .25em; justify-self: end; }
+    @media (min-width: 901px) {
+      #cases .section-intro { grid-template-columns: minmax(0, 1fr) auto; gap: 24px; }
+      #cases .section-intro h2 { font-size: clamp(2.25rem, 5.1vw, 4.5rem); }
+    }
+    .proof-card .case-link { align-self: flex-start; margin-top: auto; padding-top: 16px; }
+    .proof-card h3 { font-size: clamp(1.125rem, 1.65vw, 1.5rem); }
+    .case-image { box-sizing: border-box; width: 100%; aspect-ratio: 16 / 10; min-height: 0; margin: 0 0 16px; overflow: hidden; border-radius: 16px; background: var(--panel); }
+    .case-image img { display: block; width: 100%; height: 100%; object-fit: contain; transition: transform .25s ease; }
+    .case-image--cover { background: transparent; }
+    .case-image--cover img { object-fit: cover; }
+    @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+      .case-image:hover img { transform: scale(1.12); }
+    }
 
     .value-bar { margin-top: 18px; display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--line); border-radius: 22px; overflow: hidden; background: var(--card); }
     .value-item { padding: 30px; border-right: 1px solid var(--line); }
@@ -267,7 +283,7 @@
       nav > .btn { display: none; }
       section { margin-bottom: 110px; }
       .hero { padding-top: 72px; }
-      .hero-grid, .section-intro, .workflow-head, .partner-grid, .application { grid-template-columns: 1fr; }
+      .hero-grid, .section-intro, .partner-grid, .application { grid-template-columns: 1fr; }
       .hero-side { max-width: 620px; }
       .media-panel { min-height: 480px; padding: 18px; }
       .media-tabs { max-width: 100%; overflow-x: auto; scrollbar-width: none; }
@@ -301,7 +317,6 @@
       .value-stage-main { padding: 30px 4px; }
       .value-kpi { min-height: 150px; margin: 0 0 22px; padding: 25px 4px 8px; border-left: 0; border-top: 1px solid var(--line); }
       .value-kpi span { max-width: none; }
-      .workflow-head { grid-template-columns: 1fr; gap: 18px; }
       .workflow { grid-template-columns: 1fr; }
       .step { min-height: 0; display: grid; grid-template-columns: 40px 1fr; column-gap: 14px; }
       .step h4 { margin: 6px 0 5px; }
@@ -335,7 +350,7 @@
         <a href="#partner">合作流程</a>
         <a href="#faq">常见问题</a>
       </div>
-      <a class="btn btn-primary" href="#apply">提交合作场景 <span aria-hidden="true">↗</span></a>
+      <a class="btn btn-primary" href="#apply">测试申请 <span aria-hidden="true">↗</span></a>
       <button class="mobile-menu" id="mobile-menu" aria-label="打开导航" aria-expanded="false">☰</button>
     </nav>
   </header>
@@ -347,19 +362,13 @@
           <div class="eyebrow"><span class="dot"></span> Engineering AI Co-Innovation Program</div>
           <h1>共同定义下一代<br>工程仿真工作方式</h1>
           <div class="actions">
-            <a class="btn btn-primary" href="#apply">提交共创场景</a>
+            <a class="btn btn-primary" href="#apply">测试申请</a>
             <a class="btn btn-secondary" href="#demo">观看 AgentX 演示</a>
           </div>
         </div>
         <div class="hero-side">
           安世亚太深耕中国仿真体系建设近 30 年，持续服务企业研发与工程实践。依托这些积累，安世亚太推出专为工程仿真打造的多智能体系统 <strong>PERA AgentX</strong>。AgentX 将企业知识、工程规则与专业仿真工具融入研发流程，帮助工程团队减少重复操作与返工，缩短产品研发周期，形成可持续提升的仿真生产能力。
         </div>
-      </div>
-      <div class="invitation-note" aria-label="计划说明">
-        <span class="chip"><span class="dot"></span> 面向受邀企业与工程团队</span>
-        <span class="chip">POC 受控验证</span>
-        <span class="chip">工程师参与审核</span>
-        <span class="chip">通过浏览器访问测试环境</span>
       </div>
 
       <div class="media-panel" id="demo" aria-label="AgentX 工程仿真工作流演示">
@@ -432,8 +441,8 @@
     <section class="shell" id="workflow">
       <div class="workflow-panel">
         <div class="workflow-head">
-          <div><div class="eyebrow">Multi-agent system</div><h2>六个专业智能体，协作完成工程师任务</h2></div>
-          <p>按任务编排、各司其职。复杂任务可以被分解、回退与审核，关键状态和工程证据在智能体之间显式传递。</p>
+          <div class="eyebrow">Multi-agent system</div>
+          <h2>六个智能体协作完成仿真任务</h2>
         </div>
         <div class="workflow" aria-label="AgentX 六个专业智能体">
           <div class="step"><span class="step-dot">01</span><h4>几何分析</h4><p>在已支持格式与验证场景内，解析几何与装配、检查基础质量，并提出部件角色和处理建议。</p></div>
@@ -448,33 +457,62 @@
           <div><i></i><span>显式传递状态与证据，关键节点可插入人工审批</span></div>
           <div><i></i><span>按职责调用工程模板、企业知识与专业工具</span></div>
         </div>
-        <p class="workflow-summary">按任务组织专业能力：各司其职、自动流转、失败局部化</p>
       </div>
     </section>
 
     <section class="shell" id="cases">
       <div class="section-intro">
-        <div><div class="eyebrow">Evidence, not promises</div><h2>案例从一个真实工程问题开始</h2></div>
-        <p class="lead">正式版本将用影片、界面截图、网格、云图和报告，说明 AgentX 在每项任务中的参与环节与人工确认点。</p>
+        <div><div class="eyebrow">Engineering Case Studies</div><h2>案例从一个真实工程问题开始</h2></div>
+        <a class="case-link" href="cases.html">更多案例</a>
       </div>
       <div class="proof-grid">
         <article class="card proof-card">
-          <span class="chip proof-tag"><span class="dot"></span> 流体 / OpenFOAM</span>
-          <div class="proof-image"><div><strong>案例图 01 待替换</strong>建议加入几何、网格或流场结果图</div></div>
-          <h3>稳态流动分析</h3>
-          <p>展示任务输入、配置核对、求解执行和结果报告。证据状态将在工程复核后标注。</p>
+          <span class="chip proof-tag">结构前处理 / HyperMesh</span>
+          <figure class="case-image case-image--cover"><img src="assets/images/hypermesh-door.png" width="765" height="427" loading="lazy" alt="HyperMesh 中的车门有限元网格"></figure>
+          <span class="case-industry case-industry--automotive">Automotive</span>
+          <h3>HyperMesh 车门前处理</h3>
+          <p><strong>每扇车门预计节省 5.5 小时（约 41%）。</strong>智能体辅助几何清理、网格划分和连接候选检查，工程师负责复杂修复与最终验收。</p>
+          <a class="case-link" href="case-hypermesh-door.html" aria-label="阅览 HyperMesh 车门前处理案例">阅览</a>
         </article>
         <article class="card proof-card">
-          <span class="chip proof-tag">结构 / Mechanical 或 Nastran</span>
-          <div class="proof-image"><div><strong>案例图 02 待替换</strong>建议加入模型、边界条件或应力云图</div></div>
-          <h3>结构任务验证场景</h3>
-          <p>用于说明结构类任务的潜在合作方向；具体软件、版本与自动化环节需先评估。</p>
+          <span class="chip proof-tag">结构分析 / AgentX 自研网格和仿真算法</span>
+          <figure class="case-image case-image--cover"><img src="assets/images/packaging-structure.png" width="1433" height="897" loading="lazy" alt="AgentX 中的多层封装结构网格爆炸视图与网格验收面板"></figure>
+          <span class="case-industry case-industry--semiconductor">Semiconductor Packaging</span>
+          <h3>多层封装结构仿真</h3>
+          <p><strong>采用 AgentX 自研网格和仿真算法。</strong>以简化封装结构演示从几何分析、网格生成到结构求解与后处理的流程。分层视图与质量报告便于工程师复核网格。</p>
+          <a class="case-link" href="case-packaging.html" aria-label="阅览多层封装结构仿真案例">阅览</a>
         </article>
         <article class="card proof-card">
-          <span class="chip proof-tag">显式动力学 / 工具待确认</span>
-          <div class="proof-image"><div><strong>案例图 03 待替换</strong>建议加入过程帧、关键指标或报告页</div></div>
-          <h3>动态响应验证场景</h3>
-          <p>以代表模型、人工基线和明确验收指标为前提，评估是否进入工程智能共创计划。</p>
+          <span class="chip proof-tag">稳态热分析 / CalculiX 2.21</span>
+          <figure class="case-image case-image--cover"><img src="assets/images/transformer-thermal.png" loading="lazy" alt="AgentX 中的变压器整机稳态温度云图"></figure>
+          <span class="case-industry case-industry--power">Power Electronics</span>
+          <h3>25 kW 变压器热分析</h3>
+          <p>对包含 133 个部件的中频中压变压器进行整机热分析，观察绕组与磁芯同时发热时的温度分布，并通过热量守恒复核。</p>
+          <a class="case-link" href="case-dynamic-response.html" aria-label="阅览变压器整机稳态热分析案例">阅览</a>
+        </article>
+        <article class="card proof-card">
+          <span class="chip proof-tag">瞬态流体 / COMSOL</span>
+          <figure class="case-image case-image--cover"><img src="assets/images/photoresist-spin-coating.png" loading="lazy" alt="AgentX 中的光刻胶旋涂速度分量 comp1.v 云图与求解诊断"></figure>
+          <span class="case-industry case-industry--semiconductor">Semiconductor Manufacturing</span>
+          <h3>光刻胶旋涂仿真</h3>
+          <p>模拟 8 英寸晶圆上的光刻胶在旋涂过程中逐渐变薄，并比较黏度和转速对膜厚的影响。</p>
+          <a class="case-link" href="case-photoresist.html" aria-label="阅览光刻胶旋涂仿真案例">阅览</a>
+        </article>
+        <article class="card proof-card">
+          <span class="chip proof-tag">流体与传热 / OpenFOAM</span>
+          <figure class="case-image case-image--cover"><img src="assets/images/battery-cooling.png" loading="lazy" alt="AgentX 中的 4680 电池冷却截面温度分布和流向箭头"></figure>
+          <span class="case-industry case-industry--automotive">Automotive</span>
+          <h3>4680 电池包风冷仿真</h3>
+          <p>以简化的 4680 电池阵列为例，模拟强制空气冷却，查看电芯周围的温度分布与气流方向。</p>
+          <a class="case-link" href="case-battery-cooling.html" aria-label="阅览 4680 电池包风冷仿真案例">阅览</a>
+        </article>
+        <article class="card proof-card">
+          <span class="chip proof-tag">显式动力学 / LS-DYNA</span>
+          <figure class="case-image case-image--cover"><img src="assets/images/vehicle-crash.png" loading="lazy" alt="AgentX 中的整车碰撞等效塑性应变云图"></figure>
+          <span class="case-industry case-industry--automotive">Automotive</span>
+          <h3>整车碰撞分析</h3>
+          <p>将 LS-DYNA 碰撞分析整理为标准流程，通过异常诊断和自动生成报告减少人工调试与整理。目标是将分析交付周期从 3–5 天缩短至 24 小时以内。</p>
+          <a class="case-link" href="case-vehicle-crash.html" aria-label="阅览整车碰撞分析案例">阅览</a>
         </article>
       </div>
       <div class="value-bar" aria-label="验证的三项核心判断">

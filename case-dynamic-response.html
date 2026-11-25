@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>25 kW 中频中压变压器整机稳态热分析｜PERA AgentX</title>
+  <link rel="stylesheet" href="assets/cases.css">
+</head>
+<body>
+  <main>
+    <nav><a href="index.html#cases">返回案例区</a> <a href="cases.html">查看案例列表</a></nav>
+    <h1>25 kW 中频中压变压器整机稳态热分析</h1>
+    <p>案例参考苏黎世联邦理工学院（ETH Zurich）的 25 kW、约 50 kHz 中频中压变压器样机。该原型用于固态变压器实验验证，案例关注中频隔离变压器的整机温度分布。</p>
+    <img src="assets/images/transformer-thermal.png" alt="AgentX 中的整机温度云图与温度色标">
+    <h2>整机模型</h2>
+    <p>模型包含 133 个部件，涵盖磁芯、58 个线束匝、骨架、灌封、端子、外壳和六台风扇。网格约有 79 万个节点和 536 万个四面体单元。</p>
+    <h2>工况与复核</h2>
+    <p>在环境温度 40 °C、绕组发热 45 W、磁芯发热 41 W 的工况下，使用 CalculiX 2.21 求解整机稳态温度场，并通过热量守恒复核。</p>
+    <p><a href="https://github.com/otvam/transformer_MF_MV_25kW">CAD 模型来源</a></p>
+  </main>
+</body>
+</html>
