@@ -289,7 +289,8 @@
     .faq-item.open .plus { transform: rotate(45deg); }
     .plus { font-size: 27px; transition: .2s ease; }
 
-    .final-cta { text-align: center; padding: 95px 24px; border: 1px solid var(--line); border-radius: 28px; background: radial-gradient(circle at 50% 10%, rgba(107,174,255,.18), transparent 35%), radial-gradient(circle at 68% 66%, rgba(66,189,164,.14), transparent 30%), var(--panel); }
+    .final-cta { text-align: center; padding: 95px 24px; border: 1px solid #ead9ce; border-radius: 28px; background: linear-gradient(120deg, #fff1da, #f9e8dc 50%, #f4dfe7); }
+    .final-cta .dot { background: #a45e46; }
     .final-cta h2 { max-width: 800px; margin-inline: auto; }
     .final-cta p { max-width: 640px; margin: 0 auto 30px; color: var(--muted); }
     footer { padding: 34px 0 48px; border-top: 1px solid var(--line); }
@@ -569,17 +570,15 @@
 
     <section class="shell" id="fit">
       <div class="fit-panel">
-        <div class="section-intro" style="margin-bottom:0">
-          <div><div class="eyebrow">Good fit checklist</div><h2>什么样的场景更适合进入计划</h2></div>
-          <p class="lead">典型验证窗口为 30–90 天，实际安排取决于场景、资料完整度、工具适配和验收条件。</p>
+        <div>
+          <div class="eyebrow">Good fit checklist</div>
+          <h2>启动 AgentX PoC 需要什么？</h2>
         </div>
         <div class="fit-list">
-          <div class="fit-item"><span class="check">✓</span><span>有一项反复发生、当前成本较高的仿真任务</span></div>
-          <div class="fit-item"><span class="check">✓</span><span>能够说明结构、流体、热、电磁或显式动力学问题</span></div>
-          <div class="fit-item"><span class="check">✓</span><span>已有明确使用的软件及版本</span></div>
-          <div class="fit-item"><span class="check">✓</span><span>可提供合规的代表模型、网格或输入文件</span></div>
-          <div class="fit-item"><span class="check">✓</span><span>有专业工程师参与设置和结果审核</span></div>
-          <div class="fit-item"><span class="check">✓</span><span>能说明现有流程、人工结果或验收标准</span></div>
+          <div class="fit-item"><span class="check">✓</span><span>有一项频繁开展、目前成本较高的仿真任务</span></div>
+          <div class="fit-item"><span class="check">✓</span><span>可提供经认可的代表模型或脱敏模型，并提供与该模型对应的几何、网格和仿真报告等资料</span></div>
+          <div class="fit-item"><span class="check">✓</span><span>明确现用仿真软件及版本</span></div>
+          <div class="fit-item"><span class="check">✓</span><span>有专业工程师参与配置与结果审核，并说明现有流程、人工分析结果或验收标准</span></div>
         </div>
       </div>
     </section>
@@ -588,8 +587,8 @@
       <div class="partner-grid">
         <div class="partner-sticky">
           <div class="eyebrow">Co-innovate with AgentX</div>
-          <h2>与共创伙伴共同验证一条任务链</h2>
-          <p>这是面向企业工程团队的联合创新与工程验证计划。双方从真实场景出发，共同界定范围、验证结果与衡量价值，再决定是否扩大应用。</p>
+          <h2>先共同验证一条仿真任务链</h2>
+          <p>PoC 通常为 30–90 天。双方根据场景复杂度、资料完整度、工具适配情况和验收要求，确定具体安排。</p>
           <a class="btn btn-primary" href="#apply">提出您的场景</a>
         </div>
         <div class="timeline">
@@ -606,8 +605,7 @@
         <div class="application-copy">
           <div class="eyebrow">Apply with a scenario</div>
           <h2>用一个真实场景开始对话</h2>
-          <p class="lead">请先提供场景和工具信息。第一阶段不在公开网页上传模型、知识库或企业内部文件。</p>
-          <p class="muted">此原型表单仅演示筛选流程，不会发送或保存输入内容。</p>
+          <p class="muted">如有希望通过 AgentX 验证的仿真场景，可填写右侧表单，提交 PoC 申请。</p>
         </div>
         <form class="form-card" id="partner-form" novalidate>
           <div class="progress" aria-label="申请进度"><span class="active"></span><span></span><span></span><span></span></div>
@@ -649,8 +647,6 @@
             <span class="eyebrow">Step 4 / 4</span><h3>验证条件</h3>
             <div class="field-grid">
               <div class="field"><label for="model">代表模型或输入文件</label><select id="model"><option>可以提供脱敏资料</option><option>需要进一步确认</option><option>暂时无法提供</option></select></div>
-              <div class="field"><label for="baseline">人工结果或流程基线</label><select id="baseline"><option>已有可比较基线</option><option>可以共同建立</option><option>目前没有</option></select></div>
-              <div class="field"><label for="reviewer">工程师参与审核</label><select id="reviewer"><option>已有明确审核人</option><option>可以安排</option><option>尚未确定</option></select></div>
               <div class="field"><label for="timing">期望开始时间</label><input id="timing" placeholder="例如：未来 1–3 个月"></div>
               <div class="field full"><label for="note">补充说明</label><textarea id="note" placeholder="您希望 AgentX 帮助改善什么？"></textarea></div>
             </div>
@@ -666,13 +662,12 @@
             <button class="btn btn-secondary" type="button" id="prev-step" style="visibility:hidden">上一步</button>
             <button class="btn btn-primary" type="button" id="next-step">下一步</button>
           </div>
-          <p class="form-note">提交申请不代表已经获得测试名额或确定研发排期。</p>
         </form>
       </div>
     </section>
 
     <section class="shell" id="faq">
-      <div class="center-intro"><div class="eyebrow">Frequently asked questions</div><h2>开始之前，先把合作边界说清楚</h2></div>
+      <div class="center-intro"><div class="eyebrow">Frequently asked questions</div><h2>开始之前，先看看FAQ</h2></div>
       <div class="faq">
         <div class="faq-item"><button type="button" aria-expanded="false">工程智能共创计划与普通产品试用有什么不同？<span class="plus">＋</span></button><div class="answer">共创伙伴围绕一项真实任务与 AgentX 团队共同界定、验证和复盘，需要提供工程资料、人工基线和专业审核。这不是开放注册后的通用软件体验。</div></div>
         <div class="faq-item"><button type="button" aria-expanded="false">AgentX 会替代 Fluent、Mechanical 或其他求解器吗？<span class="plus">＋</span></button><div class="answer">不会。专业计算仍由选定的 CAE 工具完成。AgentX 协助理解任务、准备和核对配置、调用工具、记录过程并整理结果。</div></div>
@@ -686,9 +681,9 @@
     <section class="shell">
       <div class="final-cta">
         <div class="eyebrow"><span class="dot"></span> Invitation to collaborate</div>
-        <h2>准备好用一个真实场景<br>参与 AgentX 的工程智能共创了吗？</h2>
-        <p>从产品对象、仿真问题和现用工具开始。团队会先判断场景与当前验证范围是否匹配。</p>
-        <a class="btn btn-primary" href="#apply">提交共创场景</a>
+        <h2>从一个真实场景，开启工程仿真共创</h2>
+        <p>加入PERA AgentX工程智能共创计划</p>
+        <a class="btn btn-primary" href="#apply">测试申请</a>
       </div>
     </section>
   </main>
@@ -851,7 +846,7 @@
       steps.forEach((step, i) => step.classList.toggle('active', i === current));
       progress.forEach((bar, i) => bar.classList.toggle('active', i <= current));
       prev.style.visibility = current === 0 ? 'hidden' : 'visible';
-      next.textContent = current === steps.length - 1 ? '完成演示申请' : '下一步';
+      next.textContent = current === steps.length - 1 ? '提交申请' : '下一步';
     }
     prev.addEventListener('click', () => showStep(current - 1));
     next.addEventListener('click', () => {
