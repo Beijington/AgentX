@@ -357,7 +357,11 @@
 
   <main id="main">
     <section class="hero shell" id="top">
-      <div class="hero-grid">
+      <div class="hero-grid design-hero">
+        <div class="design-backdrop" aria-hidden="true">
+          <img src="assets/images/hero-design-1.png" alt="" class="is-active">
+          <img alt="">
+        </div>
         <div class="hero-copy">
           <div class="eyebrow"><span class="dot"></span> Engineering AI Co-Innovation Program</div>
           <h1>共同定义下一代<br>工程仿真工作方式</h1>
@@ -823,6 +827,16 @@
       showStep(0);
     });
   </script>
+  <style>
+    .design-hero { position: relative; isolation: isolate; padding-block: clamp(44px, 7vw, 105px); }
+    .design-backdrop { position: absolute; inset: 0; z-index: -1; overflow: hidden; background: var(--canvas); pointer-events: none; mask-image: radial-gradient(ellipse 75% 90% at 68% 50%, #000 28%, transparent 96%); }
+    .design-backdrop img { position: absolute; inset: 0 0 0 auto; width: 77%; height: 100%; object-fit: contain; object-position: right center; mix-blend-mode: multiply; opacity: 0; transition: opacity .55s ease; }
+    .design-backdrop img.is-active { opacity: .38; }
+    .design-backdrop::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, var(--canvas) 12%, transparent 78%); }
+    @media (max-width: 700px) { .design-backdrop img { width: 100%; } .design-backdrop img.is-active { opacity: .19; } }
+    @media (prefers-reduced-motion: reduce) { .design-backdrop img { transition: none; } }
+  </style>
+  <script src="assets/design-preview.js"></script>
 </body>
 </html>
 
