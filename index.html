@@ -7,6 +7,26 @@
   <title>PERA AgentX｜工程智能共创计划</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%23111111'/%3E%3Cpath d='M8 22 15.4 8h2.8L25 22h-4.2l-1.2-2.8h-6.3L12 22H8Zm6.8-6.2h3.4l-1.7-4-1.7 4Z' fill='%23fff'/%3E%3Ccircle cx='24' cy='8' r='3' fill='%235cc8b0'/%3E%3C/svg%3E">
   <style>
+    .engineering-value { margin-top: clamp(56px, 8vw, 104px); scroll-margin-top: 100px; }
+    .engineering-value-intro { margin-bottom: clamp(32px, 5vw, 58px); }
+    .engineering-value-intro h2 { margin: 0; font-size: clamp(1.8rem, 3.5vw, 3rem); line-height: 1.2; text-wrap: balance; }
+    .engineering-value-grid { border-top: 1px solid var(--line); }
+    .engineering-value-group { display: grid; grid-template-columns: minmax(0, 1fr) repeat(2, minmax(0, 1.12fr)); gap: clamp(20px, 4vw, 50px); padding: clamp(26px, 4vw, 48px) 0; border-bottom: 1px solid var(--line); }
+    .engineering-value-group:nth-child(1) { --value-accent: #906600; }
+    .engineering-value-group:nth-child(2) { --value-accent: #245d96; }
+    .engineering-value-group:nth-child(3) { --value-accent: #236855; }
+    .engineering-value-header { position: static; background: transparent; border: 0; border-right: 1px solid var(--line); padding-right: 18px; }
+    .engineering-value-header h3 { font-size: clamp(1.55rem, 3vw, 2.25rem); margin: 0; }
+    .engineering-value-header p { color: var(--value-accent); font-size: .9rem; font-weight: 650; margin: 6px 0 0; }
+    .engineering-value-point { display: grid; grid-template-columns: 1.5em minmax(0, 1fr); gap: 10px; }
+    .engineering-value-point span { color: var(--value-accent); font-size: .85rem; font-variant-numeric: tabular-nums; }
+    .engineering-value-point h4 { font-size: 1.06rem; margin: 0 0 4px; }
+    .engineering-value-point p { font-size: 1rem; color: var(--muted); margin: 0; }
+    @media (max-width: 850px) {
+      .engineering-value-group { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .engineering-value-header { grid-column: 1 / -1; border-right: 0; padding-right: 0; }
+    }
+    @media (max-width: 560px) { .engineering-value-group { grid-template-columns: 1fr; } }
     :root {
       --canvas: #f7f7f5;
       --panel: #f1f0ec;
@@ -227,7 +247,10 @@
     .timeline-item h3 { font-size: 26px; margin-bottom: 9px; }
     .timeline-item p { color: var(--muted); margin: 0; }
 
-    .fit-panel { background: var(--panel); border: 1px solid var(--line); border-radius: 28px; padding: 48px; }
+    .fit-panel { background: linear-gradient(125deg, #123261 0%, #174f72 52%, #156453 100%); color: white; border: 1px solid rgb(255 255 255 / .15); border-radius: 28px; padding: 48px; }
+    .fit-panel .eyebrow, .fit-panel .lead { color: white; }
+    .fit-panel .fit-item { border-top-color: rgb(255 255 255 / .25); }
+    .fit-panel .check { background: rgb(255 255 255 / .16); color: white; }
     .fit-list { display: grid; grid-template-columns: 1fr 1fr; gap: 0 44px; margin-top: 35px; }
     .fit-item { padding: 20px 0; border-top: 1px solid #d8d8d3; display: flex; gap: 15px; }
     .check { flex: 0 0 27px; width: 27px; height: 27px; display: grid; place-items: center; background: #dff3ed; color: var(--green-deep); border-radius: 9px; font-size: 14px; font-weight: 800; }
@@ -519,10 +542,45 @@
           <a class="case-link" href="case-vehicle-crash.html" aria-label="阅览整车碰撞分析案例">阅览</a>
         </article>
       </div>
-      <div class="value-bar" aria-label="验证的三项核心判断">
-        <div class="value-item"><b>可信</b><span>产生的结果能否通过工程师审核</span></div>
-        <div class="value-item"><b>有价值</b><span>是否减少真实工作量、等待或返工</span></div>
-        <div class="value-item"><b>可重复</b><span>能力能否复用于同类模型与任务</span></div>
+      <section class="engineering-value" id="engineering-value" aria-label="AgentX 工程价值">
+        <div class="engineering-value-intro">
+          <p class="eyebrow">Business Value</p>
+          <h2>以 AI 原生数字工程能力，驱动企业仿真体系持续进化</h2>
+        </div>
+        <div class="engineering-value-grid">
+          <article class="engineering-value-group">
+            <header class="engineering-value-header"><h3>资产增值</h3><p>让现有投入持续释放价值</p></header>
+            <div class="engineering-value-point"><span>01</span><div><h4>盘活存量技术资产</h4><p>连接既有 CAE 商软、开源工具与 HPC 资源，打破工具链壁垒，提升技术投资利用效率。</p></div></div>
+            <div class="engineering-value-point"><span>02</span><div><h4>沉淀数字工程资产</h4><p>将仿真流程、专家规则与历史案例，转化为标准化、可复用、可治理的组织资产。</p></div></div>
+          </article>
+          <article class="engineering-value-group">
+            <header class="engineering-value-header"><h3>能力升级</h3><p>把 AI 带入安全可信的工程生产</p></header>
+            <div class="engineering-value-point"><span>03</span><div><h4>构建 AI 原生架构</h4><p>以多智能体协同、知识驱动和工具编排为核心，支持模型、知识与工程工具持续演进。</p></div></div>
+            <div class="engineering-value-point"><span>04</span><div><h4>实现生产级交付</h4><p>通过规则约束、配置验证、人工确认和过程留痕，让智能仿真从“能够运行”升级为“可信交付”。</p></div></div>
+          </article>
+          <article class="engineering-value-group">
+            <header class="engineering-value-header"><h3>持续发展</h3><p>让组织能力随技术共同成长</p></header>
+            <div class="engineering-value-point"><span>05</span><div><h4>让专家方法在团队中复用</h4><p>将专家的判断方法融入标准智能体架构，帮助更多工程师稳定完成复杂仿真任务。</p></div></div>
+            <div class="engineering-value-point"><span>06</span><div><h4>获得持续技术服务</h4><p>覆盖场景梳理、工具适配、知识工程、能力研发、验证上线与持续优化，降低 AI 转型门槛。</p></div></div>
+          </article>
+        </div>
+      </section>
+    </section>
+
+    <section class="shell" id="fit">
+      <div class="fit-panel">
+        <div class="section-intro" style="margin-bottom:0">
+          <div><div class="eyebrow">Good fit checklist</div><h2>什么样的场景更适合进入计划</h2></div>
+          <p class="lead">典型验证窗口为 30–90 天，实际安排取决于场景、资料完整度、工具适配和验收条件。</p>
+        </div>
+        <div class="fit-list">
+          <div class="fit-item"><span class="check">✓</span><span>有一项反复发生、当前成本较高的仿真任务</span></div>
+          <div class="fit-item"><span class="check">✓</span><span>能够说明结构、流体、热、电磁或显式动力学问题</span></div>
+          <div class="fit-item"><span class="check">✓</span><span>已有明确使用的软件及版本</span></div>
+          <div class="fit-item"><span class="check">✓</span><span>可提供合规的代表模型、网格或输入文件</span></div>
+          <div class="fit-item"><span class="check">✓</span><span>有专业工程师参与设置和结果审核</span></div>
+          <div class="fit-item"><span class="check">✓</span><span>能说明现有流程、人工结果或验收标准</span></div>
+        </div>
       </div>
     </section>
 
@@ -539,23 +597,6 @@
           <article class="timeline-item"><div class="timeline-number">02</div><div><h3>共同界定</h3><p>选定一项代表任务，确认可用资料、人工基线、结果标准和双方验收人。</p></div></article>
           <article class="timeline-item"><div class="timeline-number">03</div><div><h3>受控验证</h3><p>在约定的主工具链上配置和测试 AgentX，由双方工程师进行阶段性检查。</p></div></article>
           <article class="timeline-item"><div class="timeline-number">04</div><div><h3>复盘决定</h3><p>比较可信度、实际价值与可重复性，再决定继续改进或扩大范围。</p></div></article>
-        </div>
-      </div>
-    </section>
-
-    <section class="shell">
-      <div class="fit-panel">
-        <div class="section-intro" style="margin-bottom:0">
-          <div><div class="eyebrow">Good fit checklist</div><h2>什么样的场景更适合进入计划</h2></div>
-          <p class="lead">典型验证窗口为 30–90 天，实际安排取决于场景、资料完整度、工具适配和验收条件。</p>
-        </div>
-        <div class="fit-list">
-          <div class="fit-item"><span class="check">✓</span><span>有一项反复发生、当前成本较高的仿真任务</span></div>
-          <div class="fit-item"><span class="check">✓</span><span>能够说明结构、流体、热、电磁或显式动力学问题</span></div>
-          <div class="fit-item"><span class="check">✓</span><span>已有明确使用的软件及版本</span></div>
-          <div class="fit-item"><span class="check">✓</span><span>可提供合规的代表模型、网格或输入文件</span></div>
-          <div class="fit-item"><span class="check">✓</span><span>有专业工程师参与设置和结果审核</span></div>
-          <div class="fit-item"><span class="check">✓</span><span>能说明现有流程、人工结果或验收标准</span></div>
         </div>
       </div>
     </section>
