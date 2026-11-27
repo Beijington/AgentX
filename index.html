@@ -93,15 +93,14 @@
       background: var(--canvas); border-bottom: 1px solid var(--line);
     }
     nav { height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 28px; }
-    .nav-actions { display: flex; align-items: center; gap: 10px; white-space: nowrap; }
-    .nav-actions > .btn { min-width: 104px; min-height: 42px; justify-content: center; padding: 0 16px; border: 1px solid transparent; border-radius: 999px; font-size: 14px; font-weight: 700; }
-    .nav-actions .test-entry { background: #4475aa; color: white; cursor: default; opacity: 1; }
+    .nav-actions { display: flex; align-items: center; gap: 25px; white-space: nowrap; }
+    .actions .test-entry { background: #4475aa; color: white; border-color: transparent; cursor: default; opacity: 1; scroll-margin-top: 150px; }
     .brand { display: flex; align-items: center; gap: 12px; font-size: 18px; font-weight: 750; letter-spacing: -.03em; }
     .brand-mark { width: 32px; height: 32px; display: grid; place-items: center; flex: 0 0 32px; }
     .brand-mark img { width: 32px; height: 32px; object-fit: contain; display: block; }
     .nav-links { display: flex; gap: 25px; align-items: center; margin-left: auto; }
-    .nav-links a { color: #62625f; font-size: 14px; font-weight: 560; }
-    .nav-links a:hover { color: var(--ink); }
+    .nav-links a, .nav-actions a { color: #62625f; font-size: 14px; font-weight: 560; }
+    .nav-links a:hover, .nav-actions a:hover { color: var(--ink); }
     .mobile-menu { display: none; border: 0; background: none; font-size: 24px; }
 
     section { margin-bottom: 160px; scroll-margin-top: 95px; }
@@ -327,7 +326,7 @@
       .nav-links.open { display: flex; }
       .mobile-menu { display: block; grid-column: 2; grid-row: 1; min-width: 44px; min-height: 44px; }
       .nav-actions { grid-column: 1 / -1; justify-content: flex-end; }
-      .nav-actions > .btn { min-height: 44px; }
+      .nav-actions a { display: inline-flex; align-items: center; min-height: 44px; }
       section { margin-bottom: 110px; }
       .hero { padding-top: 72px; }
       .hero-grid, .section-intro, .partner-grid, .application { grid-template-columns: 1fr; }
@@ -400,8 +399,8 @@
         <a href="#faq">常见问题</a>
       </div>
       <div class="nav-actions">
-        <a class="btn btn-primary" href="#apply">测试申请</a>
-        <button class="btn test-entry" type="button" disabled title="测试入口待配置">测试入口</button>
+        <a href="#apply">测试申请</a>
+        <a href="#test-entry">测试入口</a>
       </div>
       <button class="mobile-menu" id="mobile-menu" aria-label="打开导航" aria-expanded="false">☰</button>
     </nav>
@@ -419,6 +418,7 @@
           <h1>共同定义下一代<br>工程仿真工作方式</h1>
           <div class="actions">
             <a class="btn btn-primary" href="#apply">测试申请</a>
+            <button class="btn test-entry" id="test-entry" type="button" disabled title="测试入口待配置">测试入口</button>
             <a class="btn btn-secondary" href="#demo">观看 AgentX 演示</a>
           </div>
         </div>
