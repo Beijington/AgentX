@@ -294,6 +294,24 @@
 
     .final-cta { text-align: center; padding: 95px 24px; border: 1px solid #ead9ce; border-radius: 28px; background: linear-gradient(120deg, #fff1da, #f9e8dc 50%, #f4dfe7); }
     .final-cta .dot { background: #a45e46; }
+    .final-cta { position: relative; isolation: isolate; overflow: hidden; }
+    .final-cta::before, .final-cta::after { content: ""; position: absolute; inset: -35%; z-index: -1; pointer-events: none; }
+    .final-cta::before {
+      background: radial-gradient(ellipse at 34% 56%, #ffd298 0%, transparent 39%), radial-gradient(ellipse at 70% 40%, #eec5dd 0%, transparent 37%);
+      animation: invitation-cloud 18s ease-in-out infinite alternate;
+    }
+    .final-cta::after {
+      background: radial-gradient(ellipse at 62% 62%, #ffdfbb 0%, transparent 41%), radial-gradient(ellipse at 42% 32%, #e4d4f2 0%, transparent 32%);
+      opacity: .72;
+      animation: invitation-cloud 23s ease-in-out infinite alternate-reverse;
+    }
+    @keyframes invitation-cloud {
+      from { transform: translate(-8%, -5%) scale(1); }
+      to { transform: translate(10%, 7%) scale(1.12); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .final-cta::before, .final-cta::after { animation: none; }
+    }
     .final-cta h2 { max-width: 800px; margin-inline: auto; }
     .final-cta p { max-width: 640px; margin: 0 auto 30px; color: var(--muted); }
     footer { padding: 34px 0 48px; border-top: 1px solid var(--line); }
@@ -672,15 +690,6 @@
       </div>
     </section>
 
-    <section class="shell">
-      <div class="final-cta">
-        <div class="eyebrow"><span class="dot"></span> Invitation to collaborate</div>
-        <h2>从一个真实场景，开启工程仿真共创</h2>
-        <p>加入PERA AgentX工程智能共创计划</p>
-        <a class="btn btn-primary" href="#apply">测试申请</a>
-      </div>
-    </section>
-
     <section class="shell" id="faq">
       <div class="center-intro"><div class="eyebrow">Frequently asked questions</div><h2>开始之前，先看看FAQ</h2></div>
       <div class="faq">
@@ -693,6 +702,14 @@
       </div>
     </section>
 
+    <section class="shell">
+      <div class="final-cta">
+        <div class="eyebrow"><span class="dot"></span> Invitation to collaborate</div>
+        <h2>从一个真实场景，开启工程仿真共创</h2>
+        <p>加入PERA AgentX工程智能共创计划</p>
+        <a class="btn btn-primary" href="#apply">测试申请</a>
+      </div>
+    </section>
   </main>
 
   <footer>
